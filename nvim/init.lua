@@ -1,17 +1,12 @@
 
 function setup()
-    vim.g.mapleader = " "
+	vim.g.mapleader = " "
 
-	-- Plugins setups.
-	-- -
-	require("get_plugin").setup {
+	require("get_it").setup {
 		plugins = {
-			-- editor
 			"nvim-treesitter/nvim-treesitter",
-			-- languages
 			"jlcrochet/vim-crystal",
 			"thecodinglab/nvim-vlang",
-			-- themes
 			"catppuccin/nvim",
 			"ClearAspect/OneHalf",
 			"evergardentheme/nvim",
@@ -19,29 +14,27 @@ function setup()
 			"ellisonleao/gruvbox.nvim",
 		},
 	}
+
 	require("run_program").setup()
-	require("setup_shell").powershell()
+	if vim.fn.has("win32") == 1 then
+		require("setup_shell").powershell()
+	end
+
 	-- Local config is better at the bottom to provide full access to
 	-- others scripts.
 	require("local_config").setup({
 		startup = true,
 	})
 
-	-- Custom syntax.
-	-- -
 	vim.cmd[[au BufRead,BufNewFile *.sir set filetype=sir]]
 
-	-- Themes.
-	-- -
 	vim.cmd[[colorscheme gruvbox]]
 
-	local terminal_background = false
+	local terminal_background = true
 	if terminal_background then
 		vim.cmd[[hi Normal guibg=none]]
 	end
 
-	-- Remaining.
-	-- -
 	options()
 	commands()
 end
