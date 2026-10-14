@@ -1,6 +1,4 @@
 
-vim.treesitter.start()
-
 -- Get all methods from the yanked text.
 vim.api.nvim_set_keymap("n", "<leader>gm", "", {
 	callback = function(t)

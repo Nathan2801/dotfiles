@@ -1,6 +1,4 @@
 
-vim.treesitter.start()
-
 vim.api.nvim_set_option_value("makeprg", "python %", {
 	scope = "local",
 	buf = 0,
