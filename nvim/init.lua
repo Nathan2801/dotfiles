@@ -8,7 +8,7 @@ vim.o.number         = true
 vim.o.colorcolumn    = "80"
 vim.o.relativenumber = true
 
-require("get_it").setup {
+require("m_pack").setup {
 	plugins = {
 		"nvim-treesitter/nvim-treesitter",
 		"jlcrochet/vim-crystal",
@@ -21,17 +21,13 @@ require("get_it").setup {
 	},
 }
 
-require("run_program").setup()
-
-if vim.fn.has("win32") == 1 then
-	require("setup_shell").powershell()
-end
+require("m_make").setup()
 
 --
 -- Local config is better at the bottom to provide full access to
 -- others scripts
 --
-require("local_config").setup({
+require("m_conf").setup({
 	startup = true,
 })
 
