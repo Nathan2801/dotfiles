@@ -56,8 +56,9 @@ function execute_command(cmd, buffer)
 	vim.uv.read_start(stdout, function(err, data)
 		if not err and data then
 			vim.schedule(function()
-				local data = data:gsub("\n", "")
-				vim.api.nvim_buf_set_lines(buffer, -1, -1, false, {data})
+				for line in data:gmatch("[^\r\n]+") do
+					vim.api.nvim_buf_set_lines(buffer, -1, -1, false, {line})
+				end
 			end)
 		end
 	end)
@@ -65,8 +66,9 @@ function execute_command(cmd, buffer)
 	vim.uv.read_start(stderr, function(err, data)
 		if not err and data then
 			vim.schedule(function()
-				local data = data:gsub("\n", "")
-				vim.api.nvim_buf_set_lines(buffer, -1, -1, false, {data})
+				for line in data:gmatch("[^\r\n]+") do
+					vim.api.nvim_buf_set_lines(buffer, -1, -1, false, {line})
+				end
 			end)
 		end
 	end)
